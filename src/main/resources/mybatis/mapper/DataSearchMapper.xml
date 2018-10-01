@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.data_search.mapper.DataSearchMapper">
+    
+    <sql id="selectDataByTimeID" >
+        <if test="d_time != null">
+            d_time = #{d_time}
+        </if>
+
+        <if test="d_person != null">
+            AND d_person = #{d_person}
+        </if>
+
+        <if test="d_theme != null">
+            AND d_theme = #{d_theme}
+        </if>
+
+        <if test="d_speakTheme != null">
+            AND d_speakTheme = #{d_speakTheme}
+        </if>
+
+        <if test="d_speakContent != null">
+            AND d_speakContent = #{d_speakContent}
+        </if>
+    </sql>
+    <!--通过data-->
+    <select id="selectDataByAll" parameterType="com.feng.data_search.javabean.DataBean" resultType="com.feng.data_search.javabean.DataBean">
+        select d_time,d_person,d_theme,d_speakTheme,d_speakContent from dataSearch
+        <where>
+             <include refid="selectDataByTimeID"></include>
+        </where>
+    </select>
+
+
+</mapper>

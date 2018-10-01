@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信息检索系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Developed By M Abdur Rokib Promy">
+    <meta name="keywords" content="Admin, Bootstrap 3, Template, Theme, Responsive">
+    <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/ionicons.min.css}" href="../static/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}" href="../static/images/favicon.png">
+    <link th:href="@{/css/morris.css}" href="../static/css/morris.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/jquery-jvectormap-1.2.2.css}" href="../static/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/datepicker3.css}" href="../static/css/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/daterangepicker-bs3.css}" href="../static/css/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/iCheck/all.css}" href="../static/css/iCheck/all.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_787526_ljlrtoo6w7g.css">
+     <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-black">
+<header class="header" th:fragment="head">
+    <a th:href="@{/upload}" href="upload.html" class="logo" style="font-size: 25px;font-family:黑体">
+        菜单
+    </a>
+    <nav class="navbar navbar-fixed-top" role="navigation">
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                        <span>欢迎您：<span th:if="${session.username}">[[${session.username}]]</span><i class="caret"></i></span>
+
+                    </a>
+                    <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                        <li>
+                            <a th:href="@{/upload}"><i class="iconfont icon-yonghu2 fa fa-ban fa-fw pull-right"></i>个人信息</a>
+                        </li>
+						 <li>
+                            <a th:href="@{/upload}"><i class="iconfont icon-xiugai  fa fa-ban fa-fw pull-right"></i>个人信息修改</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a th:href="@{/user/logout}"><i class="iconfont icon-tuichu2 fa fa-ban fa-fw pull-right"></i>退出</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                        <span th:text="欢迎您："><i class="caret" th:if="${session.username}">[[${session.username}]]</i></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                        <li>
+                            <a th:href="@{/upload}"><i class="iconfont icon-yonghu2 fa fa-ban fa-fw pull-right"></i>个人信息</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/upload}"><i class="iconfont icon-xiugai  fa fa-ban fa-fw pull-right"></i>个人信息修改</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a th:href="@{/user/logout}"><i class="iconfont icon-tuichu2 fa fa-ban fa-fw pull-right"></i>退出</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <aside class="left-side sidebar-offcanvas" th:fragment="left">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img th:src="@{/images/logo.jpg}" src="../static/images/logo.jpg" class="img-circle" alt="User Image" />
+                </div>
+                <div class="pull-left info">
+                    <p th:text="Hello"></p>
+                    <a href="#"><i class="fa fa-circle text-success"></i>管理员</a>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a th:href="@{/video_back/upload}" href="upload.html">
+                        <i class="iconfont icon-msnui-upload"></i> <span class="cebian">&nbsp;电影上传</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/video_back/tvupload}" href="tvupload.html">
+                        <i class="iconfont icon-web-icon-"></i> <span class="cebian">&nbsp;电视剧上传</span>
+                    </a>
+                </li>
+				 <li>
+                    <a th:href="@{/video_back/update}" href="update.html">
+                        <i class="iconfont icon-xiugai07"></i> <span class="cebian">&nbsp;视频修改</span>
+                    </a>
+                </li>
+				<li>
+                    <a th:href="@{/video_back/list}" href="look.html">
+                        <i class="iconfont icon-liulan"></i> <span class="cebian">&nbsp;视频播放</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <aside class="right-side">
+        <section class="content">
+            <div class="row" style="margin-bottom:5px;">
+                <div class="col-md-12" style="text-align: center">
+                    <div class="sm-st clearfix">
+                      <div class="sm-st-info">
+                          <span>浪潮影院</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <header class="panel-heading"> 电影上传</header>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="upform" th:action="@{/dataSearch}" >
+                                <div class="input-group col-md-offset-3 col-md-6">
+                                    <span class="input-group-addon">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：</span>
+                                    <input name="d_time" type="text" class="form-control" id="title" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                                <div class="input-group col-md-offset-3 col-md-6">
+                                    <span class="input-group-addon">人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;物：</span>
+                                    <input name="d_person" type="text" class="form-control" id="tags" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                                <div class="input-group col-md-offset-3 col-md-6">
+                                    <span class="input-group-addon">主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：</span>
+                                    <select name="d_theme" class="form-control" id="permission" >
+                                        <!--从数据库中检索-->
+                                        <option th:each="themeType:${session.themeTypes}" th:text="${themeType.t_themeType}"></option>
+                                    </select>
+                                </div>
+                                <div class="input-group col-md-offset-3 col-md-6">
+                                    <span name="d_speakTheme" class="input-group-addon">讲话题目：</span>
+                                    <textarea class="form-control" rows="6" id="description"></textarea>
+                                </div>
+
+                                <div class="input-group col-md-offset-3 col-md-6">
+                                    <span class="input-group-addon">讲话内容：</span>
+                                    <input name="d_speakContent" type="text" class="form-control" id="film" aria-describedby="inputGroupSuccess1Status">
+
+                                </div>
+                                <div class="input-group col-md-offset-3 col-md-6">
+                                    <span class="input-group-addon">封面地址：</span>
+                                    <input type="text" class="form-control" id="img" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+
+                                <div class="input-group col-md-offset-3 col-md-6">
+                                    <span class="input-group-addon">视频提交：</span>
+                                    <input type="button" class="form-control btn-success" id="submit" value="提交" >
+                                </div>
+                            </form>
+                        </div>
+                        <!--检索出来的数据-->
+                        <div>
+                            <table align="center">
+                                <thead>
+                                    <th>时间</th>
+                                    <th>人物</th>
+                                    <th>主题</th>
+                                    <th>讲话题目</th>
+                                    <th>讲话内容</th>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="dataDetail:${dataDetails}">
+                                        <td th:text="${dataDetail.d_time}"></td>
+                                        <td th:text="${dataDetail.d_person}"></td>
+                                        <td th:text="${dataDetail.d_theme}"></td>
+                                        <td th:text="${dataDetail.d_speakTheme}"></td>
+                                        <td th:text="${dataDetail.d_speakContent}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+          </div>
+        </section>
+        <div  class="footer-main" style="bottom: 0;width: 100%;padding-right: 2%">
+            浪潮影院 &nbsp;&nbsp;&nbsp;&nbsp;&copy; 版权所有&nbsp;&nbsp;&nbsp;&nbsp; 2018
+        </div>
+    </aside>
+</div>
+<script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js" type="text/javascript"></script>
+<script th:src="@{/js/jquery-ui-1.10.3.min.js}" src="../static/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+<script th:src="@{/js/daterangepicker.js}" src="../static/js/daterangepicker.js" type="text/javascript"></script>
+<script th:src="@{/js/chart.js}" src="../static/js/chart.js" type="text/javascript"></script>
+<script th:src="@{/js/icheck.min.js}" src="../static/js/icheck.min.js" type="text/javascript"></script>
+<script th:src="@{/js/fullcalendar.js}" src="../static/js/fullcalendar.js" type="text/javascript"></script>
+<script th:src="@{/js/app.js}" src="../static/js/app.js" type="text/javascript"></script>
+<script th:src="@{/js/dashboard.js}" src="../static/js/dashboard.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.6.0/skins/default/aliplayer-min.css"/>
+<script th:src="@{/lib/es6-promise.min.js}" src="../static/lib/es6-promise.min.js"></script>
+<script th:src="@{/js/aliyunupload.js}" src="../static/js/aliyunupload.js"></script>
+
+
+</body>
+</html>
