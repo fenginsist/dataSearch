@@ -9,7 +9,10 @@ spring:
   thymeleaf:
     cache: false
 server:
-  port: 8081
+  port: 8080
+
+  servlet:
+    context-path: /main.html
 
 
 mybatis:
